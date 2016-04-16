@@ -165,8 +165,6 @@ module Mondo
       @web_hooks ||= begin
         resp = api_get("webhooks", account_id: self.account_id)
 
-        puts resp.inspect
-
         resp.parsed['webhooks'].map { |hook| WebHook.new(hook, self) }
       end
     end
@@ -199,8 +197,6 @@ module Mondo
 
       if !opts[:data].nil?
         opts[:body] = opts[:data].to_param
-
-        puts "SETTING BODY #{opts[:body]}"
 
         opts[:headers]['Content-Type'] = 'application/x-www-form-urlencoded' # sob sob
       end
